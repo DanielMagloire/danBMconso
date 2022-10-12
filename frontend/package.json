@@ -9,7 +9,7 @@
   ],
   "private": true,
   "scripts": {
-    "dev": "SET NODE_OPTIONS=--openssl-legacy-provider && npm run format && webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
+    "dev": "SET NODE_OPTIONS=npm run format && webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
     "format": "prettier --write \"**/**.+(js|json|vue|md)\"",
     "lint": "eslint --ext .js,.vue src",
