@@ -1,4 +1,8 @@
-FROM node:lts-alpine
+FROM node
+
+ENV POSTGRES_NAME=bmconso \
+    POSTGRES_USER=bmconso \
+    POSTGRES_PASSWORD=password
 
 # installe un simple serveur http pour servir un contenu statique
 RUN npm install -g http-server
@@ -26,4 +30,4 @@ COPY . .
 RUN npm run build
 
 EXPOSE 8080
-CMD [ "http-server", "dist" ]
+CMD [ "http-server", "/app/dist" ]
