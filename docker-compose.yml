@@ -2,7 +2,7 @@ version: "3"
 
 services:
   postgres:
-    image: postgres
+    image: postgres:14.1
     volumes:
       - /data/db:/var/lib/postgresql/data
     environment:
@@ -47,7 +47,7 @@ services:
     ports:
       - "8080:8080"
     links:
-      - postgres:postgres
+      - postgres:postgres:14.1
       - pgadmin:pgadmin4
     container_name: bmconsowebapp
     restart: always  
