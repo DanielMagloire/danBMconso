@@ -1,0 +1,42 @@
+https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-20-04-fr
+
+Étape 1 - Installation de PostgreSQL
+
+Docker hub
+
+docker pull postgres:14.5
+
+docker pull dpage/pgadmin4
+
+#NETWORK
+
+## Create docker network
+```
+docker network ls
+```
+```
+docker network create bmconso-network
+```
+```
+docker network ls
+
+# RUN
+docker run -d \
+--name postgresdb \
+-p 5432:5432 \
+--network bmconso-network \
+-e POSTGRES_PASSWORD=password \
+-e POSTGRES_USER=postgres \
+-e POSTGRES_DB=bmconso \
+postgres:14.5
+
+
+docker run -d \
+-p 5050:80 \
+--name pgadmin4 \
+--network bmconso-network \
+-e 'PGADMIN_DEFAULT_EMAIL=grand_dan2@yahoo.fr' \
+-e 'PGADMIN_DEFAULT_PASSWORD=SuperSecret' \
+-e 'PGADMIN_DEFAULT_ENHANCED_COOKIE_PROTECTION=True' \
+-e 'PGADMIN_CONFIG_CONSOLE_LOG_LEVEL=10' \
+dpage/pgadmin4

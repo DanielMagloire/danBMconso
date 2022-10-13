@@ -2,7 +2,7 @@ version: "3"
 
 services:
   postgres:
-    image: postgres:14.1
+    image: postgres:14.5
     volumes:
       - /data/db:/var/lib/postgresql/data
     environment:
@@ -11,6 +11,8 @@ services:
       - POSTGRES_PASSWORD=password
     ports:
       - "5432:5432"
+    networks:
+      - bmconso-network
 
   backend:
     build:
@@ -29,6 +31,8 @@ services:
       - POSTGRES_PASSWORD=password
     depends_on:
       - postgres
+    networks:
+      - bmconso-network
 
   pgadmin:
     container_name: pgadmin4
@@ -39,6 +43,8 @@ services:
       - PGADMIN_DEFAULT_PASSWORD=SuperSecret
     ports:
       - "5050:80"
+    networks:
+      - bmconso-network
 
   frontend:
     build:
@@ -50,4 +56,10 @@ services:
       - postgres:postgres:14.1
       - pgadmin:pgadmin4
     container_name: bmconsowebapp
-    restart: always  
+    restart: always
+    networks:
+      - bmconso-network
+  
+  networks:
+    bmconso-network:
+      driver: bridge  

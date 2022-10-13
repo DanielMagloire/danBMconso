@@ -1,10 +1,11 @@
 # syntax=docker/dockerfile:1
 # pull official base image
-FROM python
+FROM python:3
 
 #directory to store app source code
 RUN mkdir /code
 
+COPY . ./code
 #directory to store app source code
 WORKDIR /code
 
@@ -17,8 +18,8 @@ ENV PYTHONUNBUFFERED=1
 # install dependencies
 RUN pip install --upgrade pip
 RUN pip install psycopg2-binary
-COPY requirements.txt /code/
+#COPY ../requirements.txt .
 RUN pip install -r requirements.txt
 
-# copy project
-COPY . /code/
+
+#CMD ["python3", "manage.py", "runserver", "0.0.0.0:8000"]
